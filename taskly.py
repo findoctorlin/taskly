@@ -173,7 +173,10 @@ def get_querie(supported_queries: dict[str, dict]) -> tuple[Callable, dict]:
                                                              # ** 把整个dict解包传递给add_argument()
                                                              # 最终相当于p.add_argument("--status", "-s", help="Filter tasks by status (default is 'all')", choices=["all", "done", "todo", "in-progress"], type=str.lower, default="all")
 
-    args: dict = parser.parse_args().__dict__
+    '''
+    解析用户输入
+    '''
+    args: dict = parser.parse_args().__dict__ # parser.parse_args() 解析用户输入的命令行参数
     querie: Callable = supported_queries[args.pop("command")]["target"]
 
     return querie, args
